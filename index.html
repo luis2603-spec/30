@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¿Quién recibe más?</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #f4f4f9, #d6e4f0);
+      color: #333;
+    }
+    h1 {
+      color: #007bff;
+      margin: 20px 0;
+    }
+    #intro {
+      background-color: #eaeaea;
+      padding: 15px;
+      margin: 20px auto;
+      max-width: 600px;
+      border-radius: 10px;
+      border: 2px solid #333;
+      font-size: 18px;
+    }
+    #lista-nombres {
+      margin: 20px auto;
+      padding: 10px;
+      max-width: 400px;
+      text-align: left;
+      background-color: #fff;
+      border: 2px solid #007bff;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    #lista-nombres ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    #lista-nombres li {
+      font-size: 16px;
+      padding: 5px 0;
+      color: #555;
+    }
+    #ruleta {
+      margin: 20px auto;
+      border: 5px solid #007bff;
+      border-radius: 50%;
+      width: 300px;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #eaeaea;
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    }
+    #mensaje {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #555;
+      font-weight: bold;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      color: #fff;
+      background-color: #007bff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    footer {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <!-- Título -->
+  <h1>¿Quién recibe más?</h1>
+
+  <!-- Mensaje Introductorio -->
+  <div id="intro">
+    Con esta ruleta sabremos quién recibe más en el salón, ¿Serás tú?
+  </div>
+
+  <!-- Lista de Nombres -->
+  <div id="lista-nombres">
+    <h2>Participantes:</h2>
+    <ul>
+      <li>Melvin</li>
+      <li>Sebastián H</li>
+      <li>Sebastián R</li>
+      <li>Aaron</li>
+      <li>Jarving</li>
+      <li>Cesar</li>
+      <li>Camilo</li>
+      <li>Luifer</li>
+      <li>Oscar</li>
+      <li>Miguel</li>
+      <li>Juan</li>
+      <li>Joyce</li>
+      <li>Jorge</li>
+      <li>Javier</li>
+      <li>Joice</li>
+    </ul>
+  </div>
+
+  <!-- Ruleta -->
+  <div id="ruleta">🎡</div>
+  <p id="mensaje">Presiona el botón para realizar el sorteo.</p>
+  <button onclick="girarRuleta()">Hacer sorteo</button>
+
+  <!-- Pie de Página -->
+  <footer>
+    Ruleta quinto de contabilidad
+  </footer>
+
+  <script>
+    const nombres = [
+      "Melvin", "Sebastián H", "Sebastián R", "Aaron", "Jarving", "Cesar",
+      "Camilo", "Luifer", "Oscar", "Miguel", "Juan", "Joyce", "Jorge", "Javier", "Joice"
+    ];
+
+    const elegidos = ["Aaron", "Jarving", "Juan"];
+    const mensajes = {
+      "Aaron": "Aaron el policía",
+      "Jarving": "Ana Kari es mía",
+      "Juan": "poli hatillo"
+    };
+
+    let intervalo;
+
+    function girarRuleta() {
+      const ruleta = document.getElementById("ruleta");
+      const mensaje = document.getElementById("mensaje");
+
+      let contador = 0;
+
+      // Animación de los nombres
+      intervalo = setInterval(() => {
+        ruleta.innerText = nombres[contador];
+        contador = (contador + 1) % nombres.length; // Repetir los nombres en bucle
+      }, 100);
+
+      // Seleccionar al ganador después de 3 segundos
+      setTimeout(() => {
+        clearInterval(intervalo); // Detener la animación
+        const elegido = elegidos[Math.floor(Math.random() * elegidos.length)];
+        ruleta.innerText = elegido;
+        mensaje.innerText = mensajes[elegido];
+      }, 3000);
+    }
+  </script>
+</body>
+  </html>
